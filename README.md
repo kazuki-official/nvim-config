@@ -10,10 +10,7 @@
       <img alt="Windows" src="https://img.shields.io/badge/Windows-%23.svg?style=flat-square&logo=windows&color=0078D6&logoColor=white" />
     </a>
     <a href="https://github.com/neovim/neovim/releases/tag/stable">
-      <img src="https://img.shields.io/badge/Neovim-0.12.2-blueviolet.svg?style=flat-square&logo=Neovim&logoColor=green" alt="Neovim minimum version"/>
-    </a>
-    <a href="https://github.com/jdhao/nvim-config/search?l=vim-script">
-      <img src="https://img.shields.io/github/languages/top/jdhao/nvim-config" alt="Top languages"/>
+      <img src="https://img.shields.io/badge/Neovim-0.12.3-blueviolet.svg?style=flat-square&logo=Neovim&logoColor=green" alt="Neovim minimum version"/>
     </a>
     <a href="https://github.com/jdhao/nvim-config/graphs/commit-activity">
       <img src="https://img.shields.io/github/commit-activity/m/jdhao/nvim-config?style=flat-square" />
@@ -21,10 +18,7 @@
     <a href="https://github.com/jdhao/nvim-config/graphs/contributors">
       <img src="https://img.shields.io/github/contributors/jdhao/nvim-config?style=flat-square" />
     </a>
-    <a>
-      <img src="https://img.shields.io/github/repo-size/jdhao/nvim-config?style=flat-square" />
-    </a>
-    <a href="https://github.com/jdhao/nvim-config/blob/master/LICENSE">
+    <a href="https://github.com/jdhao/nvim-config/blob/main/LICENSE">
       <img src="https://img.shields.io/github/license/jdhao/nvim-config?style=flat-square&logo=GNU&label=License" alt="License"/>
     </a>
     <a href="https://deepwiki.com/jdhao/nvim-config">
