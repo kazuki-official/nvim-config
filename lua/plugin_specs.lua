@@ -20,6 +20,24 @@ local firenvim_not_active = function()
   return not vim.g.started_by_firenvim
 end
 
+local function navigate_window(direction)
+  return function()
+    local previous_win = vim.api.nvim_get_current_win()
+
+    -- Terminalモードを終了
+    vim.cmd("stopinsert")
+
+    -- Neovim標準のウィンドウ移動
+    vim.cmd("wincmd " .. direction)
+
+    -- 移動先が存在しなかった場合は、ターミナル入力に戻る
+    if vim.api.nvim_get_current_win() == previous_win then
+      vim.cmd("startinsert")
+    end
+  end
+end
+
+
 local plugin_specs = {
   -- auto-completion engine
   { "hrsh7th/cmp-nvim-lsp", lazy = true },
@@ -805,6 +823,38 @@ local plugin_specs = {
   {
   "coder/claudecode.nvim",
   dependencies = { "folke/snacks.nvim" },
+  opts = {
+    terminal = {
+      snacks_win_opts = {
+        keys = {
+            nav_h = {
+              "<C-w>h",
+              navigate_window("h"),
+              mode = "t",
+              desc = "Navigate left",
+            },
+            nav_j = {
+              "<C-w>j",
+              navigate_window("j"),
+              mode = "t",
+              desc = "Navigate down",
+            },
+            nav_k = {
+              "<C-w>k",
+              navigate_window("k"),
+              mode = "t",
+              desc = "Navigate up",
+            },
+            nav_l = {
+              "<C-w>l",
+              navigate_window("l"),
+              mode = "t",
+              desc = "Navigate right",
+            },
+          },
+      },
+    },
+  },
   config = true,
   -- `cmd` lets lazy.nvim create command stubs that load the plugin on first use,
   -- so `:ClaudeCode` and friends work on a fresh start. Without it, a keys-only
