@@ -824,9 +824,30 @@ local plugin_specs = {
   "coder/claudecode.nvim",
   dependencies = { "folke/snacks.nvim" },
   opts = {
+    diff_opts = {
+      open_in_new_tab = true,
+      hide_terminal_in_new_tab = true,
+    },
     terminal = {
+      provider = "snacks",
+      auto_insert = false,
+      auto_close = true,
       snacks_win_opts = {
+        position = "float",
+        width = 0.8,
+        height = 0.8,
+        border = "rounded",
+        title = "Claude Code",
+        title_pos = "center",
         keys = {
+            normal = {
+              "<C-n>",
+              function()
+                vim.cmd("stopinsert")
+              end,
+              mode = "t",
+              desc = "Go to normal mode",
+            },
             nav_h = {
               "<C-w>h",
               navigate_window("h"),
