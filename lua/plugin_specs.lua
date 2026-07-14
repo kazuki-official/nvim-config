@@ -940,6 +940,13 @@ local plugin_specs = {
     words = { enabled = true },
   },
 },
+{
+  'akinsho/toggleterm.nvim',
+  version = "*",
+  config = function()
+    require("config.toggleterm")
+  end,
+},
 }
 
 require("lazy").setup {
