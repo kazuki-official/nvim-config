@@ -102,3 +102,8 @@ keymap.set("n", "<space>s", require("nvim-tree.api").tree.toggle, {
   silent = true,
   desc = "toggle nvim-tree",
 })
+
+keymap.set("n", "<leader>s", require("nvim-tree.api").tree.focus, {
+  silent = true,
+  desc = "focus nvim-tree",
+})
