@@ -433,7 +433,11 @@ local plugin_specs = {
 
   {
     "sindrets/diffview.nvim",
-    cmd = { "DiffviewOpen" },
+    cmd = { "DiffviewOpen", "DiffviewClose" },
+    keys = {
+      { "<leader>do", "<cmd>DiffviewOpen<cr>", desc = "Diffview open" },
+      { "<leader>dc", "<cmd>DiffviewClose<cr>", desc = "Diffview close" },
+    },
     config = function()
       require("config.diffview")
     end,
@@ -824,6 +828,7 @@ local plugin_specs = {
   "coder/claudecode.nvim",
   dependencies = { "folke/snacks.nvim" },
   opts = {
+    focus_after_send = false,
     diff_opts = {
       open_in_new_tab = true,
       hide_terminal_in_new_tab = true,
