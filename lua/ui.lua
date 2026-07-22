@@ -127,6 +127,12 @@ M.colorscheme_conf = {
   thorn = function()
     use_theme("thorn")
   end,
+  tokyonight = function()
+    require("tokyonight").setup {
+      style = "night",
+    }
+    use_theme("tokyonight")
+  end,
 }
 
 M.make_transparent = function()
@@ -185,7 +191,7 @@ M.rand_colorscheme = function()
 end
 
 
-M.rand_colorscheme()
+M.colorscheme_conf.tokyonight()
 M.make_transparent()
 
 -- enable the experiment UI
