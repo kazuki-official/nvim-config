@@ -201,3 +201,19 @@ If you still have an issue, [open a new issue](https://github.com/jdhao/nvim-con
 
 Some of the resources that I find helpful in mastering Nvim is documented [here](docs/nvim_resources.md).
 You may also be interested in my posts on configuring Nvim [here](https://jdhao.github.io/categories/Nvim/).
+
+# 自分で追加したプラグイン
+
+* Tokyonightcolor (カラースキーマ)
+* ToggleTerm
+    * <Space>Tでターミナルを開く
+* ClaudeCodenvim
+    * <leader>afでClaudeCodeを開く
+
+## Tmuxとの連携
+
+### Tmux Pluginの追加
+
+https://github.com/tmux-plugins/tpm
+
+
