@@ -976,24 +976,6 @@ local plugin_specs = {
     { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
   },
 },
-{
-  'stevearc/aerial.nvim',
-  opts = {
-    on_attach = function(bufnr)
-      -- Jump forwards/backwards between symbols with '[a' and ']a'
-      vim.keymap.set("n", "[a", "<cmd>AerialPrev<CR>", { buffer = bufnr })
-      vim.keymap.set("n", "]a", "<cmd>AerialNext<CR>", { buffer = bufnr })
-    end,
-  },
-  keys = {
-    { "<leader>o", "<cmd>AerialToggle!<CR>", desc = "Toggle Aerial outline" },
-  },
-  -- Optional dependencies
-  dependencies = {
-     "nvim-treesitter/nvim-treesitter",
-     "nvim-tree/nvim-web-devicons"
-  },
-},
 }
 
 require("lazy").setup {
