@@ -115,7 +115,7 @@ local enabled_lsp_servers = {
 
   lua_ls = { exe = "lua-language-server", optional = false },
 
-  pyright = { exe = "delance-langserver", optional = false },
+  pyright = { exe = "pyright-langserver", optional = false },
   pyrefly = { exe = "pyrefly", optional = true },
   ruff = { exe = "ruff", optional = false },
 
