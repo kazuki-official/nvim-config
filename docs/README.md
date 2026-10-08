@@ -46,7 +46,11 @@ There are a few dependencies if we want to use Nvim for efficient editing and de
 ### Python
 
 A lot of Nvim plugins are mainly written in Python, so we must install Python 3.
-The easiest way to install is via [Anaconda](https://docs.anaconda.com/anaconda/install/index.html) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
+This config uses [uv](https://docs.astral.sh/uv/) to manage Python environments and tools.
+
+```bash
+brew install uv
+```
 
 After installation, make sure that you can run `python --version`,
 and that the output should be Python 3.x.
@@ -54,23 +58,49 @@ and that the output should be Python 3.x.
 ### Pynvim
 
 Nvim relies on [pynvim](https://github.com/neovim/pynvim) to communicate with plugins that utilize its Python binding.
-Pynvim is required by plugins such as [wilder.nvim](https://github.com/gelguy/wilder.nvim).
+This config expects a virtual environment at `.venv` inside the Nvim config directory
+(see `lua/globals.lua`, which sets `g:python3_host_prog` to `<config>/.venv/bin/python3`).
 
-```
-pip install -U pynvim
-```
-
-### python-lsp-server
-
-[python-lsp-server (pylsp)](https://github.com/python-lsp/python-lsp-server) is a Python [Language Server](https://microsoft.github.io/language-server-protocol/) for completion, linting, go to definition, etc.
-
-```
-pip install 'python-lsp-server[all]' pylsp-mypy python-lsp-isort python-lsp-black
+```bash
+cd ~/.config/nvim
+uv venv .venv
+uv pip install --python .venv/bin/python pynvim
 ```
 
-Note the executable for pylsp is also named `pylsp`. You need to set its PATH correctly.
-If you use pip from Anaconda, the executable path may be something like `$CONDA_ROOT/bin/pylsp`.
-For native python, the path for pylsp may be like `$HOME/.local/bin/pylsp`
+Add `.venv` to `.git/info/exclude` so that it is not committed.
+Run `:checkhealth provider` inside Nvim to verify that the Python 3 provider is OK.
+
+### Python LSP (pyright + ruff)
+
+Python LSP is provided by two servers, configured under `after/lsp/`:
+
+- [pyright](https://github.com/microsoft/pyright) via `delance-langserver` (a Pylance-compatible server) for completion, hover, go to definition, and type checking.
+- [ruff](https://docs.astral.sh/ruff/) for linting, formatting, and import sorting.
+
+```bash
+# pyright (requires Node.js, see below). Use the stable release, not the prerelease tag.
+npm install -g @delance/runtime@latest
+
+# ruff
+uv tool install ruff
+```
+
+Note: `delance-langserver` downloads and unpacks the Pylance runtime on its first launch,
+which can take 10-20 seconds. Do not kill Nvim during the first start, otherwise the cached
+runtime becomes corrupted. If that happens, reinstall with `npm install -g @delance/runtime@latest`.
+
+For per-project packages, create a virtual environment in the project and activate it before
+launching Nvim. pyright picks up the active environment automatically:
+
+```bash
+cd your-project
+uv venv && source .venv/bin/activate
+uv pip install <packages>
+nvim
+```
+
+Install other CLI tools with `uv tool install <package>` instead of `pip install` so that
+they stay isolated from each other.
 
 ### Node
 
