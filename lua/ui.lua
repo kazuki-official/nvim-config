@@ -127,7 +127,54 @@ M.colorscheme_conf = {
   thorn = function()
     use_theme("thorn")
   end,
+  tokyonight = function()
+    require("tokyonight").setup {
+      style = "night",
+    }
+    use_theme("tokyonight")
+  end,
 }
+
+M.make_transparent = function()
+  local groups = {
+    "Normal",
+    "NormalNC",
+    "NormalFloat",
+    "FloatBorder",
+    "SignColumn",
+    "LineNr",
+    "CursorLineNr",
+    "EndOfBuffer",
+    "StatusLine",
+    "StatusLineNC",
+    "TabLine",
+    "TabLineFill",
+    "WinSeparator",
+
+    -- popup / completion
+    "Pmenu",
+    "PmenuSel",
+    "PmenuSbar",
+    "PmenuThumb",
+
+    -- nvim-tree
+    "NvimTreeNormal",
+    "NvimTreeNormalNC",
+    "NvimTreeEndOfBuffer",
+    "NvimTreeWinSeparator",
+
+    -- bufferline
+    "BufferLineFill",
+    "BufferLineBackground",
+
+    -- floating windows
+    "FloatTitle",
+  }
+
+  for _, group in ipairs(groups) do
+    vim.api.nvim_set_hl(0, group, { bg = "NONE" })
+  end
+end
 
 --- Use a random colorscheme from the pre-defined list of colorschemes.
 M.rand_colorscheme = function()
@@ -143,7 +190,9 @@ M.rand_colorscheme = function()
   return colorscheme
 end
 
-M.rand_colorscheme()
+
+M.colorscheme_conf.tokyonight()
+M.make_transparent()
 
 -- enable the experiment UI
 require("vim._core.ui2").enable {
