@@ -107,9 +107,15 @@ require("blink.cmp").setup {
       menu = {
         auto_show = true,
       },
+      list = {
+        -- Do not preselect the first item, so <CR> runs the typed command as-is
+        -- unless an item was explicitly selected with <Tab>.
+        selection = { preselect = false, auto_insert = false },
+      },
     },
     keymap = {
-      ["<CR>"] = { "select_and_accept", "fallback" },
+      -- "accept" only fires when an item is selected (unlike "select_and_accept")
+      ["<CR>"] = { "accept", "fallback" },
     },
   },
 }
