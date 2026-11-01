@@ -5,7 +5,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("lsp_buf_conf", { clear = true }),
   callback = function(event_context)
     local client = vim.lsp.get_client_by_id(event_context.data.client_id)
-    -- vim.print(client.name, client.server_capabilities)
+    -- local msg = string.format(
+    --   "client name: %s, capabilities: %s",
+    --   client.name or "",
+    --   vim.inspect(client.server_capabilities) or ""
+    -- )
+    -- vim._log(msg, vim.log.levels.DEBUG)
 
     if not client then
       return
@@ -28,7 +33,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
           -- `local M.my_fn_name = function() ... end`.
           -- See also post here: https://www.reddit.com/r/neovim/comments/19cvgtp/any_way_to_remove_redundant_definition_in_lua_file/
 
-          -- vim.print(options.items)
+          -- vim._log(options.items, vim.log.levels.DEBUG)
           local unique_defs = {}
           local def_loc_hash = {}
 
@@ -168,6 +173,8 @@ vim.api.nvim_create_user_command("LspRestart", "lsp restart", {
 --- show LSP progress (works on Ghostty)
 vim.api.nvim_create_autocmd("LspProgress", {
   callback = function(ev)
+    vim._log(ev, vim.log.levels.DEBUG)
+
     local client_id = ev.data.client_id
     local client_name = vim.lsp.get_client_by_id(client_id).name
 
@@ -175,7 +182,7 @@ vim.api.nvim_create_autocmd("LspProgress", {
 
     local progress_title = value.title or ""
 
-    local progress_msg = ""
+    local progress_msg = value.message
     local progress_kind = value.kind
     if progress_kind == "end" then
       progress_msg = "done"
@@ -202,7 +209,8 @@ local update_inlayhint = function(enable)
 end
 
 vim.api.nvim_create_user_command("LspInlayHints", function(context)
-  -- vim.print("context", context)
+  -- local msg = string.format("context: %s", vim.inspect(context))
+  -- vim._log(msg, vim.log.levels.DEBUG)
   if context["args"] == "enable" then
     vim.g.lsp_inlay_hint_enabled = true
   end
