@@ -18,9 +18,21 @@ vim._log = function(msg, level)
     return
   end
 
-  vim.api.nvim_echo({ { msg, log_hl[level] or "Normal" } }, true, {
-    err = level == vim.log.levels.ERROR,
-  })
+  local function echo()
+    vim.api.nvim_echo({ { msg, log_hl[level] or "Normal" } }, true, {
+      err = level == vim.log.levels.ERROR,
+    })
+  end
+
+  -- here we use vim.schedule to avoid the following error:
+  -- E5560: nvim_echo must not be called in a fast event context
+  -- for example, you can call nvim_echo inside callback of vim.system(). That is why we must wrap
+  -- the nvim_echo call with vim.schedule.
+  if vim.in_fast_event() then
+    vim.schedule(echo)
+  else
+    echo()
+  end
 end
 
 -- python3_host_prog is needed for python plugins, see also https://jdhao.github.io/2026/05/11/nvim_python_provider_setup/
