@@ -149,9 +149,10 @@ M.rand_colorscheme()
 require("vim._core.ui2").enable {
   enable = true,
   msg = { -- Options related to the message module.
+    -- the keys in targets option are ui-message triggers or kind, trigger takes precedence
     targets = {
-      [""] = "cmd",
       empty = "msg",
+      progress = "msg",
     },
     cmd = { -- Options related to messages in the cmdline window.
       height = 0.4, -- Maximum height while expanded for messages beyond 'cmdheight'.

@@ -721,13 +721,6 @@ local plugin_specs = {
   },
 
   {
-    "j-hui/fidget.nvim",
-    event = "BufRead",
-    config = function()
-      require("config.fidget-nvim")
-    end,
-  },
-  {
     "folke/lazydev.nvim",
     ft = "lua", -- only load on lua files
     opts = {
