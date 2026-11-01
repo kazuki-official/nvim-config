@@ -285,7 +285,7 @@ api.nvim_create_autocmd("BufWritePost", {
 
     local exe_path = cmd[1]
     if not utils.executable(exe_path) then
-      vim.print(string.format("%s not found!", exe_path))
+      vim._log(string.format("%s not found!", exe_path))
       return
     end
 

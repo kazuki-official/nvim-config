@@ -821,7 +821,7 @@ if completion_engine == "nvim-cmp" then
 elseif completion_engine == "blink" then
   vim.list_extend(plugin_specs, blink_plugin_specs)
 else
-  vim.print(string.format("Unknown completion engine: %s!", completion_engine))
+  vim._log(string.format("Unknown completion engine: %s!", completion_engine), vim.log.levels.WARN)
 end
 
 if git_sign_engine == "gitsigns" then
@@ -829,7 +829,7 @@ if git_sign_engine == "gitsigns" then
 elseif git_sign_engine == "minidiff" then
   vim.list_extend(plugin_specs, minidiff_specs)
 else
-  vim.print(string.format("Unknown git sign engine: %s!", git_sign_engine))
+  vim._log(string.format("Unknown git sign engine: %s!", git_sign_engine), vim.log.levels.WARN)
 end
 
 require("lazy").setup {

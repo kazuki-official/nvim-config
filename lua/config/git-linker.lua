@@ -4,7 +4,8 @@ local gitlinker = require("gitlinker")
 gitlinker.setup {
   callbacks = {
     ["dev.azure.com"] = function(url_data)
-      vim.print(url_data)
+      vim._log(url_data, vim.log.levels.DEBUG)
+
       local url = require("gitlinker.hosts").get_base_https_url(url_data)
 
       if url_data.lstart then

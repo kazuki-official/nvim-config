@@ -239,7 +239,7 @@ keymap.set("n", "<leader>cb", function()
 end, { desc = "show cursor" })
 
 keymap.set("n", "q", function()
-  vim.print("q is remapped to Q in Normal mode!")
+  vim._log("q is remapped to Q in Normal mode!", vim.log.levels.WARN)
 end)
 keymap.set("n", "Q", "q", {
   desc = "Record macro",

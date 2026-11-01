@@ -81,7 +81,7 @@ vim.api.nvim_buf_create_user_command(0, "AddRef", function(opts)
   local args = vim.split(opts.args, " ", { trimempty = true })
 
   if #args < 2 then
-    vim.print("Usage: :AddRef <label> <url>")
+    vim._log("Usage: :AddRef <label> <url>", vim.log.levels.WARN)
     return
   end
 
