@@ -1,27 +1,7 @@
 local utils = require("utils")
+local logging = require("logging")
 
-vim.g.log_level = vim.log.levels.INFO
-
-local log_hl = {
-  [vim.log.levels.TRACE] = "Comment",
-  [vim.log.levels.DEBUG] = "Comment",
-  [vim.log.levels.INFO] = "Normal",
-  [vim.log.levels.WARN] = "WarningMsg",
-  [vim.log.levels.ERROR] = "ErrorMsg",
-}
-
----@param msg string
----@param level? integer one of vim.log.levels, defaults to INFO
-vim._log = function(msg, level)
-  level = level or vim.log.levels.INFO
-  if level < vim.g.log_level then
-    return
-  end
-
-  vim.api.nvim_echo({ { msg, log_hl[level] or "Normal" } }, true, {
-    err = level == vim.log.levels.ERROR,
-  })
-end
+vim.g.log_level = logging.get_log_level()
 
 -- python3_host_prog is needed for python plugins, see also https://jdhao.github.io/2026/05/11/nvim_python_provider_setup/
 local config_path = vim.fn.stdpath("config")

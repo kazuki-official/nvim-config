@@ -81,7 +81,7 @@ vim.api.nvim_buf_create_user_command(0, "AddRef", function(opts)
   local args = vim.split(opts.args, " ", { trimempty = true })
 
   if #args < 2 then
-    vim.print("Usage: :AddRef <label> <url>")
+    vim._log("Usage: :AddRef <label> <url>", vim.log.levels.WARN)
     return
   end
 
@@ -93,7 +93,7 @@ end, {
   desc = "Add reference link at buffer end",
   nargs = "+",
   complete = function(arg_lead, cmdline, curpos)
-    -- vim.print(string.format("arg_lead: '%s', cmdline: '%s', curpos: %d", arg_lead, cmdline, curpos))
+    -- vim._log(string.format("arg_lead: '%s', cmdline: '%s', curpos: %d", arg_lead, cmdline, curpos), vim.log.levels.DEBUG)
 
     -- only complete the first argument
     if count_consecutive_spaces(cmdline) > 1 then

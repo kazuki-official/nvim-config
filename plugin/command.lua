@@ -14,7 +14,7 @@ vim.api.nvim_create_user_command("CopyPath", function(context)
     local project_marker = { ".git", "pyproject.toml" }
     local project_root = vim.fs.root(0, project_marker)
     if project_root == nil then
-      vim.print("can not find project root")
+      vim._log("can not find project root", vim.log.levels.WARN)
       return
     end
 
@@ -26,7 +26,7 @@ vim.api.nvim_create_user_command("CopyPath", function(context)
   end
 
   vim.fn.setreg("+", file_path)
-  vim.print("Filepath copied to clipboard!")
+  vim._log("Filepath copied to clipboard!")
 end, {
   bang = false,
   nargs = 1,
@@ -50,7 +50,7 @@ vim.api.nvim_create_user_command("JSONFormat", function(context)
   elseif utils.executable("python") then
     python_cmd = "python"
   else
-    vim.print("No python executable found")
+    vim._log("No python executable found", vim.log.levels.ERROR)
     return
   end
 

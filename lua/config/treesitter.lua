@@ -45,7 +45,7 @@ vim.api.nvim_create_autocmd("FileType", {
       if vim.tbl_contains(available_langs, lang) then
         -- install treesitter parsers and queries
         local install_msg = string.format("Installing parsers and queries for %s", lang)
-        vim.print(install_msg)
+        vim._log(install_msg)
         require("nvim-treesitter").install(lang)
       end
     end

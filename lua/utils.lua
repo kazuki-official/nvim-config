@@ -145,7 +145,7 @@ end
 function M.get_py_env()
   local project_root = M.get_proj_root()
   if project_root == nil then
-    vim.print("Can not find project root!")
+    vim._log("Can not find project root!", vim.log.levels.WARN)
     return
   end
 

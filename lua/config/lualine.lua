@@ -53,7 +53,8 @@ local function update_ahead_behind_info(result)
     -- when the git command fails, it usually means there are some changes in your branch. For example, you
     -- on branchA, for this one, you have upstream branch. Then you changed to branchB, and there is no upstream
     -- branch, the git rev-list command will error out. In this case, we should clear the cache
-    -- vim.print("Error running git command", result)
+    -- local msg = string.format("Error running git command: %s", vim.inspect(result))
+    -- vim._log(msg, vim.log.levels.DEBUG)
     git_status_cache.ahead_count = 0
     git_status_cache.behind_count = 0
   end
@@ -228,7 +229,7 @@ local diff = function()
   end
 
   local info = { added = add_num, modified = modify_num, removed = remove_num }
-  -- vim.print(info)
+  -- vim._log(info, vim.log.levels.DEBUG)
   return info
 end
 

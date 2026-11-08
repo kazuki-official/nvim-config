@@ -162,7 +162,7 @@ opt.undofile = true
 -- choice, IMHO.
 opt.shortmess:append("cS")
 
-opt.messagesopt = "hit-enter,history:500"
+opt.messagesopt = "hit-enter,history:500,progress:c"
 
 -- Completion behaviour
 opt.completeopt:append("menuone") -- Show menu even if there is only one item
